@@ -19,6 +19,10 @@ import {
     Observable,
 } from "rxjs/Observable";
 
+/**
+ * Initialisieren via provide laeuft auf Fehler (anscheinend Parametertypen).
+ * -> Klaeren, ob das Abfangen von HTTP-Fehlern hier richtig ist.
+ */
 export class HttpErrorHandler extends XHRBackend {
 
   constructor(browserXhr: BrowserXhr, baseResponseOptions: ResponseOptions, xsrfStrategy: XSRFStrategy) {
