@@ -13,7 +13,7 @@ export class FileSizePipe implements PipeTransform {
   private static suffix = [ "Bytes", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
   public transform(value: any[]/*, params: any[]*/): any {
-    let item: number = Number(value);
+    const item: number = Number(value);
     return this.conv(item, 0);
   }
 

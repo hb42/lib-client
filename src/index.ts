@@ -2,7 +2,18 @@
  * Created by hb on 22.10.16.
  */
 
-export * from "./component";
-export * from "./pipe";
-export * from "./session";
-export * from "./module";
+export {
+  LibClientModule,
+} from "./module";
+export {
+  FlexboxSplitter,
+} from "./component";
+export {
+  FileSizePipe,
+  IEDatePipe,
+} from "./pipe";
+export {
+  Version,
+  VersionService,
+} from "./service";
+export * from "./override";

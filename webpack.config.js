@@ -185,9 +185,9 @@ module.exports = function(env) {
         {
           test  : /^(?!.*\.min\.css$).*\.css$/,
           // loaders: ["style-loader", "css-loader"]
-          loader: ExtractTextPlugin.extract({
-                                              fallbackLoader: "style-loader",
-                                              loader        : "css-loader?sourceMap"
+          loader : ExtractTextPlugin.extract({
+                                              fallback: "style-loader",
+                                              use     : "css-loader?sourceMap"
                                             })
         },
 

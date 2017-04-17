@@ -1,18 +1,22 @@
 /**
  * Created by hb on 07.08.16.
  *
- * HTTP-Errors abfangen
+ * HTTP-Errors abfangen und withCredentials setzen
  *
  * s. http://stackoverflow.com/questions/34934009/handling-401s-globally-with-angular-2
  */
 
 import {
-    BrowserXhr,
-    Request,
-    Response,
-    ResponseOptions,
-    XHRBackend,
-    XSRFStrategy,
+  Injectable,
+} from "@angular/core";
+import {
+  BrowserXhr,
+  Request,
+  Response,
+  ResponseOptions,
+  XHRBackend,
+  XHRConnection,
+  XSRFStrategy,
 } from "@angular/http";
 import "rxjs/add/operator/catch";
 import {
@@ -20,14 +24,21 @@ import {
 } from "rxjs/Observable";
 
 /**
- * Initialisieren via provide laeuft auf Fehler (anscheinend Parametertypen).
- * -> Klaeren, ob das Abfangen von HTTP-Fehlern hier richtig ist.
+ * -> https://dpopescu.me/2016/10/08/using-http-interceptors-in-angular-2/
+ *    (Ohne @Injectable und ohne c'tor funktioniert's allerdings nicht)
+ *
+ * -> https://github.com/angular/angular/issues/11178
+ *    (falls es Probleme mit AOT gibt)
+ *
  */
-export class HttpErrorHandler extends XHRBackend {
 
-  constructor(browserXhr: BrowserXhr, baseResponseOptions: ResponseOptions, xsrfStrategy: XSRFStrategy) {
+@Injectable()
+export class XHRBackendHandler extends XHRBackend {
+
+  constructor(private browserXhr: BrowserXhr, private baseResponseOptions: ResponseOptions,
+              private xsrfStrategy: XSRFStrategy) {
     super(browserXhr, baseResponseOptions, xsrfStrategy);
-    console.info("HttpErrorHandler");
+    console.info("c'tor HttpErrorHandler");
   }
 
   /**
@@ -49,11 +60,18 @@ export class HttpErrorHandler extends XHRBackend {
    *
    * die restlichen 4xx und 5xx sollten auf einer Fehlerseite landen
    */
-  public createConnection(request: Request) {
-    let xhrConnection = super.createConnection(request);
+  public createConnection(request: Request): XHRConnection {
+    /*
+     * Fuer alle Requests "withCredentials" setzen, sonst wird der Session-Cookie
+     * nicht mitgeschickt.
+     * [ Alternativ fuer jeden Request setzen: .get(url, {withCredentials: true}) ]
+     */
+    request.withCredentials = true;
+    const xhrConnection: XHRConnection = super.createConnection(request);
+
     xhrConnection.response = xhrConnection.response.catch((error: Response) => {
       // base href -> wird zum vollstaendigen Pfad erweitert
-      let myurl = document.getElementsByTagName("base")[0]["href"];
+      const myurl = document.getElementsByTagName("base")[0]["href"];
       // let myurl = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
       //     + this.env.metadata.BASEURL;
       console.info("HTTP error ", error.status, error.statusText);
