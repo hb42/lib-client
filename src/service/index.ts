@@ -5,4 +5,7 @@
 export {
   VersionService,
 } from "./version.service";
+export {
+  ElectronService,
+} from "./electron.service";
 export * from "./version";

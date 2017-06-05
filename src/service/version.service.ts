@@ -29,15 +29,14 @@ export class VersionService {
     return this.version;
   }
 
-  public load(): Promise<Version> {
-    const promise = this.http.get("/package.json").map( (res) => res.json() ).toPromise();
-    promise.then( (r) => this.makeVer(r));
-    return promise;
+  public init(): Promise<Version> {
+    return this.http.get("./package.json").map( (res) => res.json() ).toPromise()
+        .then( (r) => this.makeVer(r));
   }
 
   private makeVer(pack): Version {
     const pre = semver.prerelease(pack.version); // ~['alpha', 10]
-    let prerel: string = "";
+    let prerel = "";
     let prebuild: number | null = null;
     if (pre.length > 0) {
       if (typeof pre[0] === "number") {
@@ -54,6 +53,7 @@ export class VersionService {
     }
     this.version = {
       name: pack.name,
+      displayname: pack.displayname,
       description: pack.description,
       version: pack.version,
       copyright: pack.copyright,

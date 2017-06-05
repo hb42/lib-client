@@ -13,6 +13,7 @@ export {
   IEDatePipe,
 } from "./pipe";
 export {
+  ElectronService,
   Version,
   VersionService,
 } from "./service";

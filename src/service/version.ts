@@ -4,6 +4,7 @@
 
 export interface Version {
   name: string;
+  displayname: string;
   description: string;
   version: string;
   copyright: string;
