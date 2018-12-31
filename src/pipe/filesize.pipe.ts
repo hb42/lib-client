@@ -10,7 +10,10 @@ import {
 @Pipe({name: "filesize"})
 export class FileSizePipe implements PipeTransform {
 
-  private static suffix = [ "Bytes", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+  private readonly suffix: string[];
+  constructor() {
+    this.suffix = [ "Bytes", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+  }
 
   public transform(value: any /*, params: any[]*/): any {
     const item: number = Number(value);
@@ -19,7 +22,7 @@ export class FileSizePipe implements PipeTransform {
 
   private conv(val: number, idx: number): string {
     if (val < 1024) {
-      return val + " " + FileSizePipe.suffix[idx];
+      return val + " " + this.suffix[idx];
     } else {
       return this.conv(Math.round(val / 1024), ++idx);
     }

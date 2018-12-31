@@ -1,37 +1,56 @@
 {
   "name": "@hb42/lib-client",
-  "version": "0.0.4-alpha.55",
+  "version": "1.0.0",
+  "copyright": "Copyright (c) 2018 Hartmut Bauer",
   "description": "Common objects for Angular clients",
-  "main": "dist/lib-client.js",
-  "module": "index.js",
+  "main": "lib/src/index.js",
+  "typings": "./lib",
   "scripts": {
+    "clean:lib": "./node_modules/.bin/rimraf lib",
+    "clean:tmp": "./node_modules/.bin/rimraf tmp",
+    "clean": "npm run clean:lib && npm run clean:tmp",
+    "ngc": "./node_modules/.bin/ngc",
+    "build": "npm run clean && npm run ngc",
+    "make": "npm run build && npm --no-git-tag-version version prepatch && npm pack",
+    "release": "npm run build && npm --no-git-tag-version version patch && npm pack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "hb",
   "license": "MIT",
-  "private": true,
+  "repository": "hb42/lib-client",
+  "publishConfig": {
+    "registry": "http://e077npm"
+  },
   "peerDependencies": {
-    "@angular/common": "^4.0.0",
-    "@angular/core": "^4.0.0",
-    "@angular/http": "^4.0.0",
-    "@angular/platform-browser": "^4.0.0",
-    "rxjs": "^5.0.1",
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0",
+    "@angular/http": "^7.0.0",
+    "@angular/platform-browser": "^7.0.0",
+    "@angular/router": "^7.0.0",
+    "@hb42/lib-common": "https://github.com/hb42/lib-common/releases/download/v1.0.1/hb42-lib-common-1.0.1.tgz",
+    "rxjs": "^6.0.0",
     "semver": "^5.3.0",
-    "zone.js": "^0.8.0"
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular/language-service": "^4.0.0",
-    "tslint": "^5.0.0",
-    "typescript": "^2.0.0"
+    "@angular/common": "^7.1.4",
+    "@angular/compiler": "^7.1.4",
+    "@angular/compiler-cli": "^7.1.4",
+    "@angular/core": "^7.1.4",
+    "@angular/http": "^7.1.4",
+    "@angular/language-service": "^7.1.4",
+    "@angular/platform-browser": "^7.1.4",
+    "@angular/router": "^7.1.4",
+    "@hb42/lib-common": "https://github.com/hb42/lib-common/releases/download/v1.0.1/hb42-lib-common-1.0.1.tgz",
+    "@types/node": "^10.12.18",
+    "@types/semver": "^5.5.0",
+    "copyfiles": "^2.1.0",
+    "rimraf": "^2.6.2",
+    "rxjs": "^6.3.3",
+    "semver": "^5.6.0",
+    "tslint": "~5.11.0",
+    "typescript": "3.1.6",
+    "zone.js": "~0.8.26"
   },
-  "dependencies": {
-    "@angular/common": "^4.0.0",
-    "@angular/core": "^4.0.0",
-    "@angular/http": "^4.0.0",
-    "@angular/platform-browser": "^4.0.0",
-    "@types/semver": "^5.3.31",
-    "rxjs": "^5.0.1",
-    "semver": "^5.3.0",
-    "zone.js": "^0.8.0"
-  }
+  "dependencies": {}
 }

@@ -15,4 +15,5 @@ export interface Version {
   patch: number;
   prerelease: string;
   build: number | null;
+  versions: string[]; // Versionen von Subsystemen etc.
 }

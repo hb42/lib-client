@@ -5,16 +5,6 @@
 export {
   LibClientModule,
 } from "./module";
-export {
-  FlexboxSplitter,
-} from "./component";
-export {
-  FileSizePipe,
-  IEDatePipe,
-} from "./pipe";
-export {
-  ElectronService,
-  Version,
-  VersionService,
-} from "./service";
-export * from "./override";
+export * from "./service";
+export * from "./component";
+export * from "./pipe";

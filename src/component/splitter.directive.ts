@@ -31,7 +31,6 @@ import {
     ElementRef,
     Input,
     OnInit,
-    Renderer,
 } from "@angular/core";
 
 @Directive({
@@ -42,7 +41,7 @@ export class FlexboxSplitter implements OnInit {
   public static SPLITTER_EVENT: string = "hbsplitter";
 
   // inputs
-  @Input() private storageId: string;
+  @Input() private storageId: string = "";
 
   private splitter: HTMLElement;
   private prevEl: HTMLElement;
@@ -55,16 +54,16 @@ export class FlexboxSplitter implements OnInit {
 
   private lastPos: number = 0;
 
-  constructor(private el: ElementRef, private renderer: Renderer) {
+  constructor(private el: ElementRef) {
     console.info("c'tor flexboxsplitter");
     this.splitter = el.nativeElement;
   }
 
   public ngOnInit() {
     // Umgebung holen
-    this.prevEl = <HTMLElement> this.splitter.previousElementSibling;
-    this.nextEl = <HTMLElement> this.splitter.nextElementSibling;
-    let parent = this.splitter.parentElement;
+    this.prevEl = this.splitter.previousElementSibling as HTMLElement;
+    this.nextEl = this.splitter.nextElementSibling as HTMLElement;
+    const parent: Element = this.splitter.parentElement as Element;
     // parent muss flexbox sein
     // if (this.getProp(parent, "display") !== "flex") {
     //   throw "Error: parent element for splitter must have style display:flex.";
@@ -72,15 +71,15 @@ export class FlexboxSplitter implements OnInit {
     // Richtung festlegen und passende Styles fuer den Splitter
     if (this.getProp(parent, "flexDirection") === "row") {
       this.dimension = "width";
-      this.splitter.style["border-left"] = "1px solid gray";
+      this.splitter.style["border-left" as any] = "1px solid gray";
       this.splitter.style["cursor"] = "col-resize";
     } else {
       this.dimension = "height";
-      this.splitter.style["border-top"] = "1px solid gray";
+      this.splitter.style["border-top" as any] = "1px solid gray";
       this.splitter.style["cursor"] = "row-resize";
     }
     this.splitter.style["background"] = "#eee";
-    this.splitter.style[this.dimension] = "6px";
+    this.splitter.style[this.dimension as any] = "6px";
 
     // Elemente nur fuer fixe Groesse aendern, flexGrow >0 = auto
     // this.chgPrev = this.getProp(this.prevEl, "flexGrow") === 0;
@@ -89,39 +88,39 @@ export class FlexboxSplitter implements OnInit {
     this.initSplitter();
   }
 
-  private getProp (elem: Element, prop: string): any {
+  private getProp(elem: Element, prop: string): any {
     // window.getComputedStyle(elem).getPropertyValue(prop);
     // im *IE* fkt. getPropertyValue() nicht, alt. direkter Zugriff mit ["prop"]
-    return window.getComputedStyle(elem)[prop];
+    return window.getComputedStyle(elem)[prop as any];
   }
 
   private initSplitter() {
     // let self: FlexboxSplitter = this;
 
     // var event = new Event("hb.splitter"); fkt. leider nicht im *IE*, statt dessen:
-    let params: any = { bubbles: false, cancelable: false, detail: undefined };
-    this.splitterEvent = document.createEvent( "CustomEvent" );
+    const params: any = { bubbles: false, cancelable: false, detail: undefined };
+    this.splitterEvent = document.createEvent("CustomEvent");
     this.splitterEvent
-        .initCustomEvent( FlexboxSplitter.SPLITTER_EVENT, params.bubbles, params.cancelable, params.detail );
+        .initCustomEvent(FlexboxSplitter.SPLITTER_EVENT, params.bubbles, params.cancelable, params.detail);
 
-    let drag = (evt: DragEvent) => {
+    const drag = (evt: DragEvent) => {
       this.dimension === "width" ? calcSize(evt.clientX) : calcSize(evt.clientY);
     };
 
-    let calcSize = (pos: number) => {
+    const calcSize = (pos: number) => {
       let newsize: number;
-      let diff: number = pos - this.lastPos;
+      const diff: number = pos - this.lastPos;
       // if (self.chgPrev) {
       newsize = parseInt(this.getProp(this.prevEl, this.dimension), 10) + diff;
-      this.prevEl.style[this.dimension] = newsize + "px";
+      this.prevEl.style[this.dimension as any] = newsize + "px";
       // }
       // if (self.chgNext) {
       newsize = parseInt(this.getProp(this.nextEl, this.dimension), 10) - diff;
-      this.nextEl.style[this.dimension] = newsize + "px";
+      this.nextEl.style[this.dimension as any] = newsize + "px";
       // }
       this.lastPos = pos;
     };
-    let endDrag = () => {
+    const endDrag = () => {
       window.removeEventListener("mousemove", drag);
       window.removeEventListener("mouseup", endDrag);
 
@@ -155,7 +154,8 @@ export class FlexboxSplitter implements OnInit {
     this.lastPos = this.dimension === "width" ? this.splitter.getBoundingClientRect().left
         : this.splitter.getBoundingClientRect().top;
     if (this.storageId) {
-      let laststate = parseInt(localStorage.getItem(this.storageId), 10);
+      const state = localStorage.getItem(this.storageId);
+      const laststate = parseInt(state ? state : "0", 10);
       if (laststate) {
         calcSize(laststate);
       }

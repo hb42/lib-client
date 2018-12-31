@@ -2,10 +2,19 @@
  * Created by hb on 09.04.17.
  */
 
+// die Services muessen explizit exportiert werden
+export {
+  ElectronService,
+} from "./electron.service";
+export {
+  ErrorService,
+} from "./error.service";
 export {
   VersionService,
 } from "./version.service";
 export {
-  ElectronService,
-} from "./electron.service";
+  SseHandler,
+} from "./sse.handler";
 export * from "./version";
+export * from "./logon";
+export * from "./app.config";

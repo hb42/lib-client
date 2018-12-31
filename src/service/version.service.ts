@@ -5,53 +5,78 @@
 import * as semver from "semver";
 
 import {
+  HttpClient,
+} from "@angular/common/http";
+import {
   Injectable,
+  VERSION,
 } from "@angular/core";
-import {
-  Http,
-} from "@angular/http";
-import {
-  Observable,
-} from "rxjs/Rx";
 
 import {
+  ElectronService,
   Version,
 } from "./";
 
 @Injectable()
 export class VersionService {
-  private version: Version = null;
+  private version: Version;
+  private serverversion: Version;
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient, private electronService: ElectronService) {
   }
 
   public get ver(): Version {
     return this.version;
   }
-
-  public init(): Promise<Version> {
-    return this.http.get("./package.json").map( (res) => res.json() ).toPromise()
-        .then( (r) => this.makeVer(r));
+  public get serverVer(): Version {
+    return this.serverversion;
   }
 
-  private makeVer(pack): Version {
+  /**
+   * Versions-Resource aus package.json initialisieren.
+   * Der String serverPackage muss eine URL fuer die Server-REST-API enthalten,
+   * deren Aufruf die package.json des Servers liefert.
+   *
+   * @param {string} serverPackage
+   * @returns {Promise<Version>}
+   */
+  public init(serverPackage: string): Promise<Version> {
+    return this.http.get("./package.json").toPromise()
+        .then((r: any) => {
+          r["versions"] = ["Angular " + VERSION.full];
+          if (this.electronService.isElectron) {
+            r["versions"].push("Electron " + this.electronService.electronVersion);
+          }
+          this.version = this.makeVer(r);
+          if (serverPackage) {
+            return this.http.get(serverPackage).toPromise()
+                .then((sr) => {
+                  this.serverversion = this.makeVer(sr);
+                  return this.version;
+                }).catch((err) => {
+                  console.error("Fehler beim Ermitteln der Server-Version: " + err);
+                  return this.version;
+                });
+          } else {
+            return this.version;
+          }
+        });
+  }
+
+  private makeVer(pack: any): Version {
     const pre = semver.prerelease(pack.version); // ~['alpha', 10]
     let prerel = "";
     let prebuild: number | null = null;
-    if (pre.length > 0) {
+    if (pre && pre.length > 0) {
       if (typeof pre[0] === "number") {
         prebuild = +pre[0];
         prerel = "beta";
       } else {
         prerel = pre[0];
-        if (typeof pre[1] === "number") {
-          prebuild = +pre[1];
-        } else {
-          prebuild = 0;
-        }
+        prebuild = typeof pre[1] === "number" ? +pre[1] : 0;
       }
     }
-    this.version = {
+    const version = {
       name: pack.name,
       displayname: pack.displayname,
       description: pack.description,
@@ -64,8 +89,9 @@ export class VersionService {
       patch: semver.patch(pack.version),
       prerelease: prerel,
       build: prebuild,
+      versions: pack.versions,
     };
-    return this.version;
+    return version;
   }
 
 }

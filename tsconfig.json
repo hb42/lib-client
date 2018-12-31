@@ -1,29 +1,35 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "commonjs",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+    "declaration": true,
+    "stripInternal": false,
     "experimentalDecorators": true,
-    "removeComments": true,
-    "noEmitHelpers": false,
-    "baseUrl": "./src"
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "moduleResolution": "node",
+    "outDir": "./lib",
+    "sourceMap": true,
+    "inlineSources": true,
+    "skipLibCheck": true,
+    "lib": [
+      "es6",
+      "dom"
+    ]
   },
   "include": [
-    "index.ts",
     "src/**/*"
   ],
   "exclude": [
     "node_modules",
     "div",
-    "dist"
+    "dist",
+    "lib",
+    "tmp"
   ],
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "useWebpackText": true,
-    "strictMetadataEmit": true
-  },
-  "compileOnSave": false,
-  "buildOnSave": false
-
+  "angularCompilerOptions": {
+    "strictMetadataEmit": false,
+    "genDir": "tmp"
+  }
 }

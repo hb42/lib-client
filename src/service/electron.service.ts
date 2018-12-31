@@ -10,26 +10,34 @@ import {
  * Verbindung zur electron runtime
  *
  *  Verwendung:
-    public testElectron(electronService.ipcRenderer) {
-      console.info("### sync reply " + ipcRenderer.sendSync("synchronous-message", "ping"));
-
-      ipcRenderer.on("asynchronous-reply", (event, arg) => {
-        console.info("### async reply " + arg);
-      });
-      ipcRenderer.send("asynchronous-message", "ping");
-    }
-
+ *  <pre>
+ *   public testElectron(electronService.ipcRenderer) {
+ *     console.info("### sync reply " + ipcRenderer.sendSync("synchronous-message", "ping"));
+ *
+ *     ipcRenderer.on("asynchronous-reply", (event, arg) => {
+ *       console.info("### async reply " + arg);
+ *     });
+ *     ipcRenderer.send("asynchronous-message", "ping");
+ *   }
+ * </pre>
  */
 @Injectable()
 export class ElectronService {
 
-  private ipc_renderer;
+  private readonly ipcrenderer: any;
 
   get ipcRenderer() {
-    return this.ipc_renderer;
+    return this.ipcrenderer;
   }
   get isElectron() {
-    return typeof this.ipc_renderer !== "undefined";
+    return typeof this.ipcrenderer !== "undefined";
+  }
+  get electronVersion() {
+    if (this.isElectron) {
+      return this.ipcRenderer.sendSync("get-version", "");
+    } else {
+      return null;
+    }
   }
 
   constructor() {
@@ -37,13 +45,18 @@ export class ElectronService {
      electron mit window.require holen, das wird nicht von webpack ueberschrieben. Dadurch
      ignoriert webpack electron und packt es nicht in vendor.js. Ausserdem wird so die vorhandene
      electron-Runtime verwendet. window.require ist nur in einer node/electron-Umgebung vorhanden.
-     -> https://github.com/electron/electron/issues/7300
+     -> {@link https://github.com/electron/electron/issues/7300}
      */
-    if (typeof window["require"] === "function") {
-      const electron = window["require"]("electron");
+    const win: any = window;
+    if (typeof win.require === "function") {
+      const electron = win.require("electron");
       if (electron) {
-        this.ipc_renderer = electron.ipcRenderer;
+        this.ipcrenderer = electron.ipcRenderer;
       }
+    }
+    if (this.isElectron) {
+      console.info("Running on electron runtime:");
+      console.dir(process.versions);
     }
   }
 
