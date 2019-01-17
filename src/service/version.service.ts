@@ -40,12 +40,18 @@ export class VersionService {
    * @param {string} serverPackage
    * @returns {Promise<Version>}
    */
-  public init(serverPackage: string): Promise<Version> {
+  public async init(serverPackage: string): Promise<Version> {
     return this.http.get("./package.json").toPromise()
-        .then((r: any) => {
+        .then(async (r: any) => {
           r["versions"] = ["Angular " + VERSION.full];
           if (this.electronService.isElectron) {
             r["versions"].push("Electron " + this.electronService.electronVersion);
+          }
+          try {
+            r["githash"] = await this.http.get("./resource/git.ver").toPromise();
+          } catch (e) {
+            console.error("Fehler beim Lesen von ./resource/git.ver");
+            r["githash"] = "";
           }
           this.version = this.makeVer(r);
           if (serverPackage) {
@@ -89,6 +95,7 @@ export class VersionService {
       patch: semver.patch(pack.version),
       prerelease: prerel,
       build: prebuild,
+      githash: pack.githash ? pack.githash : "",
       versions: pack.versions,
     };
     return version;
