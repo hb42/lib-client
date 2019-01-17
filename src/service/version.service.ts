@@ -48,7 +48,8 @@ export class VersionService {
             r["versions"].push("Electron " + this.electronService.electronVersion);
           }
           try {
-            r["githash"] = await this.http.get("./resource/git.ver").toPromise();
+            const gh = await this.http.get("./resource/git.ver", { responseType: "text" }).toPromise();
+            r["githash"] = gh.replace(/\\n/, "").replace(/\\r/, "");
           } catch (e) {
             console.error("Fehler beim Lesen von ./resource/git.ver");
             r["githash"] = "";
