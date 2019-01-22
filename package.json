@@ -1,6 +1,6 @@
 {
   "name": "@hb42/lib-client",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "copyright": "Copyright (c) 2018-2019 Hartmut Bauer",
   "description": "Common objects for Angular clients",
   "main": "lib/src/index.js",

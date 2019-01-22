@@ -19,9 +19,6 @@
  * inputs: [storageId]  - Kennung fuer die Splitterposition in der localStorage
  *                        (leer -> nicht speichern)
  *
- * v 1.1.0 / 02.10.2015 Aenderung in Directive, ng2.GA-Anpassungen
- * v 1.0.0 / 27.12.2015
- *
  * Quelle:
  * https://hacks.mozilla.org/2013/12/application-layout-with-css3-flexible-box-module/
  */
@@ -55,7 +52,7 @@ export class FlexboxSplitter implements OnInit {
   private lastPos: number = 0;
 
   constructor(private el: ElementRef) {
-    console.info("c'tor flexboxsplitter");
+    console.debug("c'tor flexboxsplitter");
     this.splitter = el.nativeElement;
   }
 

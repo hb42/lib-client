@@ -35,7 +35,7 @@ export class ErrorService implements ErrorHandler {
   private readonly errors: Array<{ title: string, message: string }>;
 
   constructor(private injector: Injector, private electronService: ElectronService) {
-    console.info("c'tor ErrorService");
+    console.debug("c'tor ErrorService");
     this.errors = [];
   }
 
