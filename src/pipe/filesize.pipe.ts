@@ -1,13 +1,11 @@
-/**
- * Created by hb on 04.10.16.
- */
-
 import {
   Pipe,
   PipeTransform,
 } from "@angular/core";
 
-@Pipe({name: "filesize"})
+@Pipe({
+        name: "filesize"
+})
 export class FileSizePipe implements PipeTransform {
 
   private readonly suffix: string[];

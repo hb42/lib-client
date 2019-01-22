@@ -1,7 +1,3 @@
-/**
- * Created by hb on 06.04.17.
- */
-
 import * as semver from "semver";
 
 import {

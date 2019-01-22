@@ -1,7 +1,3 @@
-/**
- * Created by hb on 06.04.17.
- */
-
 export interface Version {
   name: string;
   displayname: string;

@@ -1,7 +1,3 @@
-/**
- * Created by a0770007 on 07.04.2017.
- */
-
 import {
   Pipe,
   PipeTransform,
@@ -14,7 +10,9 @@ import {
  *
  * *** hat sich erledigt, seit Angular5 funktioniert's ***
  */
-@Pipe({ name: "iedate" })
+@Pipe({
+        name: "iedate"
+})
 export class IEDatePipe implements PipeTransform {
 
   public transform(value: number): string {

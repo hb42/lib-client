@@ -61,10 +61,6 @@ export class LogonService {
    * @returns {Promise<string>}
    */
   public getTokenWithCheck(): Promise<string> {
-    // if (!this.ntlm) {
-    //   return null;
-    // }
-    console.debug("LogonService: getTokenWithCheck");
     if (this.dontcheck) {  // Token wird gerade geholt -> warten
       console.debug("LogonService: wait for new token");
       return this.waitForToken();

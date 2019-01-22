@@ -1,7 +1,3 @@
-/**
- * Created by hb on 09.04.17.
- */
-
 // die Services muessen explizit exportiert werden
 export {
   ElectronService,

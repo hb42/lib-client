@@ -1,7 +1,3 @@
-/**
- * Created by hb on 23.10.16.
- */
-
 import { CommonModule } from "@angular/common";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ErrorHandler, NgModule } from "@angular/core";
