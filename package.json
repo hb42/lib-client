@@ -1,6 +1,6 @@
 {
   "name": "@hb42/lib-client",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "copyright": "Copyright (c) 2018-2019 Hartmut Bauer",
   "description": "Common objects for Angular clients",
   "main": "lib/src/index.js",
@@ -11,9 +11,8 @@
     "clean": "npm run clean:lib && npm run clean:tmp",
     "ngc": "./node_modules/.bin/ngc",
     "build": "npm run clean && npm run ngc",
-    "make": "npm run build && npm --no-git-tag-version version prepatch && npm pack",
-    "release": "npm run build && npm --no-git-tag-version version patch && npm pack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "make": "npm run build && npm --no-git-tag-version version prerelease --preid=beta && npm pack",
+    "release": "npm run build && npm --no-git-tag-version version patch && npm pack"
   },
   "author": "hb",
   "license": "MIT",
@@ -27,30 +26,30 @@
     "@angular/http": "^7.0.0",
     "@angular/platform-browser": "^7.0.0",
     "@angular/router": "^7.0.0",
-    "@hb42/lib-common": "https://github.com/hb42/lib-common/releases/download/v1.0.1/hb42-lib-common-1.0.1.tgz",
+    "@hb42/lib-common": "file:../lib-common/hb42-lib-common-1.0.2.tgz",
     "rxjs": "^6.0.0",
     "semver": "^5.3.0",
     "zone.js": "^0.8.28"
   },
   "devDependencies": {
-    "@angular/common": "^7.2.1",
-    "@angular/compiler": "^7.2.1",
-    "@angular/compiler-cli": "^7.2.1",
-    "@angular/core": "^7.2.1",
-    "@angular/http": "^7.2.1",
-    "@angular/language-service": "^7.2.1",
-    "@angular/platform-browser": "^7.2.1",
-    "@angular/router": "^7.2.1",
-    "@hb42/lib-common": "https://github.com/hb42/lib-common/releases/download/v1.0.1/hb42-lib-common-1.0.1.tgz",
-    "@types/node": "^10.12.18",
+    "@angular/common": "^7.2.2",
+    "@angular/compiler": "^7.2.2",
+    "@angular/compiler-cli": "^7.2.2",
+    "@angular/core": "^7.2.2",
+    "@angular/http": "^7.2.2",
+    "@angular/language-service": "^7.2.2",
+    "@angular/platform-browser": "^7.2.2",
+    "@angular/router": "^7.2.2",
+    "@hb42/lib-common": "file:../lib-common/hb42-lib-common-1.0.2.tgz",
+    "@types/node": "^10.12.19",
     "@types/semver": "^5.5.0",
     "copyfiles": "^2.1.0",
     "rimraf": "^2.6.3",
     "rxjs": "^6.3.3",
     "semver": "^5.6.0",
     "tslint": "^5.12.0",
-    "typescript": "3.2.2",
-    "zone.js": "^0.8.28"
+    "typescript": "3.2.4",
+    "zone.js": "^0.8.29"
   },
   "dependencies": {}
 }
