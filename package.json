@@ -12,13 +12,18 @@
     "ngc": "./node_modules/.bin/ngc",
     "build": "npm run clean && npm run ngc",
     "commit": "git add -A ./lib && git commit -m \"package\" ./lib",
-    "push": "git push && git push --tags",
     "make": "npm run build && npm run commit && npm version prerelease --preid=beta",
-    "release": "npm run build && npm run commit && npm version patch"
+    "release:patch": "npm run build && npm run commit && npm version patch",
+    "release:minor": "npm run build && npm run commit && npm version minor",
+    "release:major": "npm run build && npm run commit && npm version major",
+    "release": "npm run release:patch"
   },
   "author": "hb",
   "license": "MIT",
   "repository": "hb42/lib-client",
+  "config": {
+    "platform": "win"
+  },
   "peerDependencies": {
     "@angular/common": "^7.0.0",
     "@angular/core": "^7.0.0",
@@ -39,8 +44,8 @@
     "@angular/language-service": "^7.2.3",
     "@angular/platform-browser": "^7.2.3",
     "@angular/router": "^7.2.3",
-    "@hb42/lib-common": "https://github.com/hb42/lib-common.git#semver:^1.0.0",
-    "@types/node": "^10.12.20",
+    "@hb42/lib-common": "git+https://github.com/hb42/lib-common.git#semver:^1.0.0",
+    "@types/node": "^10.12.21",
     "@types/semver": "^5.5.0",
     "copyfiles": "^2.1.0",
     "rimraf": "^2.6.3",
