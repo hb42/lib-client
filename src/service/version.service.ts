@@ -40,14 +40,14 @@ export class VersionService {
    */
   public async init(serverPackage: string): Promise<Version> {
     const webserver = this.location.prepareExternalUrl("");
-    return this.http.get(webserver + "/package.json").toPromise()
+    return this.http.get(webserver + "package.json").toPromise()
         .then(async (r: any) => {
           r["versions"] = ["Angular " + VERSION.full];
           if (this.electronService.isElectron) {
             r["versions"].push("Electron " + this.electronService.electronVersion);
           }
           try {
-            const gh = await this.http.get(webserver + "/resource/git.ver", { responseType: "text" }).toPromise();
+            const gh = await this.http.get(webserver + "resource/git.ver", { responseType: "text" }).toPromise();
             r["githash"] = gh.replace(/\n/, "").replace(/\r/, "");
           } catch (e) {
             console.error("Fehler beim Lesen von ./resource/git.ver");
