@@ -1,3 +1,4 @@
+import { Location } from "@angular/common";
 import * as semver from "semver";
 
 import {
@@ -18,7 +19,8 @@ export class VersionService {
   private version: Version;
   private serverversion: Version;
 
-  constructor(private http: HttpClient, private electronService: ElectronService) {
+  constructor(private http: HttpClient, private electronService: ElectronService,
+              private location: Location) {
   }
 
   public get ver(): Version {
@@ -37,14 +39,15 @@ export class VersionService {
    * @returns {Promise<Version>}
    */
   public async init(serverPackage: string): Promise<Version> {
-    return this.http.get("./package.json").toPromise()
+    const webserver = this.location.prepareExternalUrl("");
+    return this.http.get(webserver + "/package.json").toPromise()
         .then(async (r: any) => {
           r["versions"] = ["Angular " + VERSION.full];
           if (this.electronService.isElectron) {
             r["versions"].push("Electron " + this.electronService.electronVersion);
           }
           try {
-            const gh = await this.http.get("./resource/git.ver", { responseType: "text" }).toPromise();
+            const gh = await this.http.get(webserver + "/resource/git.ver", { responseType: "text" }).toPromise();
             r["githash"] = gh.replace(/\n/, "").replace(/\r/, "");
           } catch (e) {
             console.error("Fehler beim Lesen von ./resource/git.ver");
