@@ -1,11 +1,13 @@
+import { Location } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { ElectronService, Version } from "./";
 export declare class VersionService {
     private http;
     private electronService;
+    private location;
     private version;
     private serverversion;
-    constructor(http: HttpClient, electronService: ElectronService);
+    constructor(http: HttpClient, electronService: ElectronService, location: Location);
     readonly ver: Version;
     readonly serverVer: Version;
     /**
