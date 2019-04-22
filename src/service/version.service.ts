@@ -47,10 +47,10 @@ export class VersionService {
             r["versions"].push("Electron " + this.electronService.electronVersion);
           }
           try {
-            const gh = await this.http.get(webserver + "resource/git.ver", { responseType: "text" }).toPromise();
+            const gh = await this.http.get(webserver + "resource/git.txt", { responseType: "text" }).toPromise();
             r["githash"] = gh.replace(/\n/, "").replace(/\r/, "");
           } catch (e) {
-            console.error("Fehler beim Lesen von ./resource/git.ver");
+            console.error("Fehler beim Lesen von ./resource/git.txt");
             r["githash"] = "";
           }
           this.version = this.makeVer(r);
