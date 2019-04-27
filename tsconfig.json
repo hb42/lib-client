@@ -5,27 +5,18 @@
     "declaration": true,
     "stripInternal": false,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
     "module": "es6",
     "moduleResolution": "node",
-    "outDir": "./dist/out-tsc",
+    "outDir": "./lib",
     "sourceMap": true,
     "inlineSources": true,
     "skipLibCheck": true,
     "lib": [
       "es6",
       "dom"
-    ],
-    "paths": {
-      "lib-client": [
-        "lib"
-      ],
-      "lib-client/*": [
-        "lib/*"
-      ]
-    }
+    ]
   },
   "include": [
     "src/**/*"
@@ -36,6 +27,9 @@
     "dist",
     "lib",
     "tmp"
-  ]
-
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": false,
+    "genDir": "tmp"
+  }
 }

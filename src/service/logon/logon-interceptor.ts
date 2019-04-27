@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { JwtHeader } from "@hb42/lib-common";
 import { EMPTY, from, Observable, throwError } from "rxjs";
 import { catchError, mergeMap } from "rxjs/operators";
-import { ErrorService } from "../error.service";
+import { ErrorService } from "../";
 import { LogonService } from "./logon.service";
 
 /**
