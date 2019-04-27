@@ -43,13 +43,13 @@ export class ElectronService {
      electron-Runtime verwendet. window.require ist nur in einer node/electron-Umgebung vorhanden.
      -> {@link https://github.com/electron/electron/issues/7300}
      */
-    const win: any = window;
-    if (typeof win.require === "function") {
-      const electron = win.require("electron");
-      if (electron) {
-        this.ipcrenderer = electron.ipcRenderer;
-      }
-    }
+    // const win: any = window;
+    // if (typeof win.require === "function") {
+    //   const electron = win.require("electron");
+    //   if (electron) {
+    //     this.ipcrenderer = electron.ipcRenderer;
+    //   }
+    // }
     if (this.isElectron) {
       console.info("Running on electron runtime " + this.electronVersion);
       // console.dir(process.versions); // Angular cli ab v6 unterstuetzt keine libs mit Abhaengikeiten zu node
