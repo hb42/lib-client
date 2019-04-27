@@ -1,7 +1,7 @@
 import { ErrorHandler, Injectable, Injector } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { ElectronService } from ".";
+import { ElectronService } from "./electron.service";
 
 /**
  * Fehler-Behandlung
@@ -26,10 +26,12 @@ import { ElectronService } from ".";
  *   });
  * </pre>
  *
- * @implements {ErrorHandler}
  */
+// @dynamic
 @Injectable()
 export class ErrorService implements ErrorHandler {
+
+  public static errorPage: string = "error";
 
   private router: Router;
   private readonly errors: Array<{ title: string, message: string }>;
@@ -44,8 +46,8 @@ export class ErrorService implements ErrorHandler {
    *
    * Die Anwendung muss eine Route fuer "/error" bereitstellen.
    *
-   * @param {string} short
-   * @param {string} desc
+   * param {string} short
+   * param {string} desc
    */
   public newError(short: string, desc: string) {
     if (!this.router) {
@@ -54,7 +56,7 @@ export class ErrorService implements ErrorHandler {
     this.errors.push({title: short, message: desc});
     console.debug("** newError");
     console.debug(short + " - " + desc);
-    this.router.navigateByUrl("/error");
+    this.router.navigate(["/" + ErrorService.errorPage]);
   }
 
   public getLastError() {
@@ -100,7 +102,7 @@ export class ErrorService implements ErrorHandler {
    *
    * {@link https://angular.io/api/core/ErrorHandler}
    *
-   * @param error
+   * param error
    */
   public handleError(error: any) {
     console.debug("** handleError");
