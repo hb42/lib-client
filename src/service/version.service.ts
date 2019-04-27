@@ -35,8 +35,8 @@ export class VersionService {
    * Der String serverPackage muss eine URL fuer die Server-REST-API enthalten,
    * deren Aufruf die package.json des Servers liefert.
    *
-   * @param {string} serverPackage
-   * @returns {Promise<Version>}
+   * param {string} serverPackage
+   * returns {Promise<Version>}
    */
   public async init(serverPackage: string): Promise<Version> {
     const webserver = this.location.prepareExternalUrl("");

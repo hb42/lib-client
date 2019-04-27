@@ -9,12 +9,10 @@
     "noImplicitAny": true,
     "module": "es6",
     "moduleResolution": "node",
-    "outDir": "./lib",
-    "sourceMap": true,
-    "inlineSources": true,
-    "skipLibCheck": true,
+    "outDir": "lib",
+    "sourceMap": false,
     "lib": [
-      "es6",
+      "es2018",
       "dom"
     ]
   },
@@ -29,7 +27,12 @@
     "tmp"
   ],
   "angularCompilerOptions": {
-    "strictMetadataEmit": false,
-    "genDir": "tmp"
+    "annotateForClosureCompiler": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true
   }
+
 }
