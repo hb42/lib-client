@@ -13,7 +13,7 @@ import { LOGON_OPTIONS } from "./logonToken";
  * Die Anwendung muss die benoetigte Konfiguration als {@link LOGON_OPTIONS}-Provider
  * bereitstellen.
  *
- * @todo Handling fuer Form-Login
+ * todo Handling fuer Form-Login
  *
  * @see {@link LOGON_OPTIONS}
  * @see {@link LogonParameter}
@@ -58,7 +58,7 @@ export class LogonService {
   /**
    * Fuer HttpInterceptor Autologin Token holen
    *
-   * @returns {Promise<string>}
+   * returns {Promise<string>}
    */
   public getTokenWithCheck(): Promise<string> {
     if (this.dontcheck) {  // Token wird gerade geholt -> warten
@@ -82,7 +82,7 @@ export class LogonService {
    * Fehler bei der Anmeldung wirft eine Exception, darum muss sich
    * die Anwendung kuemmern.
    *
-   * @returns {Promise<string>} JWT-Token
+   * returns {Promise<string>} JWT-Token
    */
   public autoLogin(): Promise<string> {
     this.dontcheck = true;
@@ -114,7 +114,7 @@ export class LogonService {
   /**
    * get JWT payload
    *
-   * @returns {any}
+   * returns {any}
    */
   public getData(): any {
     const token = this.getToken();
@@ -128,8 +128,8 @@ export class LogonService {
   /**
    * Expires token in x seconds?
    *
-   * @param {number} seconds
-   * @returns {boolean}
+   * param {number} seconds
+   * returns {boolean}
    */
   public tokenExpiresIn(seconds: number): boolean {
     const token = this.getToken();
@@ -143,7 +143,7 @@ export class LogonService {
   /**
    * get Token from storage
    *
-   * @returns {string}
+   * returns {string}
    */
   public getToken(): string {
     const token = localStorage.getItem(JwtToken);
@@ -153,7 +153,7 @@ export class LogonService {
   /**
    * save token to storage
    *
-   * @param {string} token
+   * param {string} token
    */
   public setToken(token: string) {
     // console.debug("save token ");

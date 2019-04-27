@@ -15,6 +15,6 @@ import { LogonParameter } from "./logon.parameter";
  * @see {@link LogonService}
  * @see {@link LogonInterceptor}
  *
- * @type {InjectionToken<LogonParameter>}
+ * type {InjectionToken<LogonParameter>}
  */
 export const LOGON_OPTIONS = new InjectionToken<LogonParameter>("LOGON_OPTIONS");

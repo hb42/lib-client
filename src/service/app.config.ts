@@ -20,6 +20,7 @@ import { Injectable } from "@angular/core";
  * in tsconfig.json unter "angularCompilerOptions" "strictMetadataEmit"
  * auf "false" setzen.
  */
+// @dynamic
 @Injectable()
 export class AppConfig {
 
