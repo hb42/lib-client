@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/index.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,eAAe,EAAE,MAAM,UAAU,CAAC;AAC3C,cAAc,WAAW,CAAC;AAC1B,cAAc,aAAa,CAAC;AAC5B,cAAc,QAAQ,CAAC","sourcesContent":["export { LibClientModule } from \"./module\";\nexport * from \"./service\";\nexport * from \"./component\";\nexport * from \"./pipe\";\n"]}
