@@ -3,7 +3,7 @@
   "version": "1.0.11",
   "copyright": "Copyright (c) 2018-2019 Hartmut Bauer",
   "description": "Common objects for Angular clients",
-  "main": "lib/src/index.js",
+  "main": "lib/index.js",
   "typings": "./lib",
   "scripts": {
     "clean:lib": "./node_modules/.bin/rimraf lib",
@@ -13,9 +13,9 @@
     "build": "npm run clean && npm run ngc",
     "commit": "git add -A ./lib && git commit -m \"publish npm package\" ./lib",
     "make": "npm run build && npm run commit && npm version prerelease --preid=beta",
-    "release:patch": "npm run build && npm run commit && npm version patch",
-    "release:minor": "npm run build && npm run commit && npm version minor",
-    "release:major": "npm run build && npm run commit && npm version major",
+    "release:patch": "npm version patch && npm run build && npm run commit",
+    "release:minor": "npm version minor && npm run build && npm run commit",
+    "release:major": "npm version major && npm run build && npm run commit",
     "release": "npm run release:patch"
   },
   "author": "hb",
