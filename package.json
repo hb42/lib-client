@@ -31,7 +31,7 @@
     "@angular/router": "^8.0.0",
     "@hb42/lib-common": "https://github.com/hb42/lib-common.git#semver:^1.0.0",
     "rxjs": "^6.5.2",
-    "semver": "^6.0.0",
+    "semver": "^7.0.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
@@ -48,7 +48,7 @@
     "copyfiles": "^2.1.0",
     "rimraf": "^2.6.3",
     "rxjs": "^6.5.2",
-    "semver": "^6.1.1",
+    "semver": "^7.0.0",
     "tsickle": ">=0.34.0",
     "tslint": "^5.17.0",
     "typescript": "3.4.5",
