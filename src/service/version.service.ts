@@ -1,5 +1,5 @@
 import { Location } from "@angular/common";
-import * as semver from "semver";
+import { major, minor, patch, prerelease} from "semver";
 
 import {
   HttpClient,
@@ -70,7 +70,7 @@ export class VersionService {
   }
 
   private makeVer(pack: any): Version {
-    const pre = semver.prerelease(pack.version); // ['alpha', 10] || [10]
+    const pre = prerelease(pack.version); // ['alpha', 10] || [10]
     let prerel = "";
     let prebuild: number | null = null;
     if (pre && pre.length > 0) {
@@ -90,9 +90,9 @@ export class VersionService {
       copyright: pack.copyright,
       author: pack.author,
       license: pack.license,
-      major: semver.major(pack.version),
-      minor: semver.minor(pack.version),
-      patch: semver.patch(pack.version),
+      major: major(pack.version),
+      minor: minor(pack.version),
+      patch: patch(pack.version),
       prerelease: prerel,
       build: prebuild,
       githash: pack.githash ? pack.githash : "",
