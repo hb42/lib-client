@@ -70,7 +70,7 @@ export class VersionService {
   }
 
   private makeVer(pack: any): Version {
-    const pre = semver.prerelease(pack.version); // ~['alpha', 10]
+    const pre = semver.prerelease(pack.version); // ['alpha', 10] || [10]
     let prerel = "";
     let prebuild: number | null = null;
     if (pre && pre.length > 0) {
