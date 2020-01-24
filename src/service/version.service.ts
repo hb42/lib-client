@@ -1,4 +1,7 @@
 import { Location } from "@angular/common";
+// TODO nach upd auf semver 7.*
+// tslint:disable-next-line:no-submodule-imports
+// import { major, minor, patch, prerelease} from "semver/preload";
 import { major, minor, patch, prerelease} from "semver";
 
 import {

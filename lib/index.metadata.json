@@ -1,1 +1,0 @@
-[{"__symbolic":"module","version":4,"metadata":{},"exports":[{"from":"./module","export":["LibClientModule"]},{"from":"./service"},{"from":"./component"},{"from":"./pipe"}]}]
