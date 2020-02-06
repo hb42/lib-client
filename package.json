@@ -25,34 +25,34 @@
     "platform": "win"
   },
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@angular/platform-browser": "^8.0.0",
-    "@angular/router": "^8.0.0",
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/platform-browser": "^9.0.0",
+    "@angular/router": "^9.0.0",
     "@hb42/lib-common": "https://github.com/hb42/lib-common.git#semver:^1.0.0",
     "rxjs": "^6.5.2",
     "semver": "^7.0.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular/common": "^8.2.14",
-    "@angular/compiler": "^8.2.14",
-    "@angular/compiler-cli": "^8.2.14",
-    "@angular/core": "^8.2.14",
-    "@angular/language-service": "^8.2.14",
-    "@angular/platform-browser": "^8.2.14",
-    "@angular/router": "^8.2.14",
+    "@angular/common": "^9.0.0",
+    "@angular/compiler": "^9.0.0",
+    "@angular/compiler-cli": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/language-service": "^9.0.0",
+    "@angular/platform-browser": "^9.0.0",
+    "@angular/router": "^9.0.0",
     "@hb42/lib-common": "git+https://github.com/hb42/lib-common.git#semver:^1.0.0",
     "@types/node": "^12.12.26",
-    "@types/semver": "^6.2.1",
+    "@types/semver": "^7.0.0",
     "copyfiles": "^2.2.0",
-    "rimraf": "^2.7.1",
+    "rimraf": "^3.0.0",
     "rxjs": "^6.5.4",
     "semver": "^7.0.0",
     "tsickle": "^0.38.0",
     "tslint": "^5.20.1",
-    "typescript": "3.4.5",
-    "zone.js": "~0.9.1"
+    "typescript": "3.7.5",
+    "zone.js": "~0.10.2"
   },
   "dependencies": {}
 }
