@@ -1,16 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "es2015",
     "baseUrl": ".",
     "declaration": true,
+    "inlineSources": true,
     "stripInternal": false,
+    "downlevelIteration": true,
     "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
-    "module": "es6",
-    "moduleResolution": "node",
     "outDir": "lib",
     "sourceMap": false,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "lib": [
       "es2018",
       "dom"
@@ -27,11 +33,10 @@
     "tmp"
   ],
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": false,
-    "skipTemplateCodegen": true,
-    "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
     "enableResourceInlining": true,
     "enableIvy": false
   }

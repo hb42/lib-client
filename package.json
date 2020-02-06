@@ -9,7 +9,7 @@
     "clean:lib": "./node_modules/.bin/rimraf lib",
     "clean:tmp": "./node_modules/.bin/rimraf tmp",
     "clean": "npm run clean:lib && npm run clean:tmp",
-    "ngc": "./node_modules/.bin/ngc && mv lib/src/* lib && rmdir lib/src",
+    "ngc": "./node_modules/.bin/ng build",
     "build": "npm run clean && npm run ngc",
     "commit": "git add -A ./lib && git commit -m \"publish npm package\" ./lib",
     "make": "npm run build && npm run commit && npm version prerelease --preid=beta",
@@ -35,6 +35,9 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.900.0",
+    "@angular-devkit/build-ng-packagr": "~0.900.0",
+    "@angular/cli": "^9.0.0",
     "@angular/common": "^9.0.0",
     "@angular/compiler": "^9.0.0",
     "@angular/compiler-cli": "^9.0.0",
@@ -45,13 +48,17 @@
     "@hb42/lib-common": "git+https://github.com/hb42/lib-common.git#semver:^1.0.0",
     "@types/node": "^12.12.26",
     "@types/semver": "^7.0.0",
+    "codelyzer": "^5.1.2",
     "copyfiles": "^2.2.0",
+    "ng-packagr": "^9.0.0",
+    "protractor": "~5.4.3",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.4",
     "semver": "^7.0.0",
+    "ts-node": "~8.3.0",
     "tsickle": "^0.38.0",
     "tslint": "^5.20.1",
-    "typescript": "3.7.5",
+    "typescript": "~3.7.5",
     "zone.js": "~0.10.2"
   },
   "dependencies": {}

@@ -10,10 +10,8 @@ import {
   VERSION,
 } from "@angular/core";
 
-import {
-  ElectronService,
-  Version,
-} from "./";
+import { ElectronService } from "./electron.service";
+import { Version } from "./version";
 
 @Injectable()
 export class VersionService {
