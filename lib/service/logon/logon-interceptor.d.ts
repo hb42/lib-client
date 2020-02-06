@@ -1,6 +1,6 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { ErrorService } from "../";
+import { ErrorService } from "../error.service";
 import { LogonService } from "./logon.service";
 /**
  * {@link HttpInterceptor} fuer das Einfuegen eines JWT in die Aufrufe

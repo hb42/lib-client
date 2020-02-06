@@ -1,6 +1,7 @@
 import { Location } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
-import { ElectronService, Version } from "./";
+import { ElectronService } from "./electron.service";
+import { Version } from "./version";
 export declare class VersionService {
     private http;
     private electronService;
