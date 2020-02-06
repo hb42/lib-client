@@ -1,1 +1,0 @@
-[{"__symbolic":"module","version":4,"metadata":{},"exports":[{"from":"./electron.service","export":["ElectronService"]},{"from":"./error.service","export":["ErrorService"]},{"from":"./version.service","export":["VersionService"]},{"from":"./sse.handler","export":["SseHandler"]},{"from":"./version"},{"from":"./logon"},{"from":"./app.config"}]}]

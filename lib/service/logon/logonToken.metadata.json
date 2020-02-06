@@ -1,1 +1,0 @@
-[{"__symbolic":"module","version":4,"metadata":{"LOGON_OPTIONS":{"__symbolic":"new","expression":{"__symbolic":"reference","module":"@angular/core","name":"InjectionToken","line":19,"character":33},"arguments":["LOGON_OPTIONS"]}}}]
