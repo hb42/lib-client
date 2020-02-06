@@ -20,5 +20,5 @@
  */
 export declare class AppConfig {
     static settings: any;
-    static load(jsonFile: string): Promise<{}>;
+    static load(jsonFile: string): Promise<unknown>;
 }

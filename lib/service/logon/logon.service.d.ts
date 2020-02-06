@@ -22,10 +22,10 @@ export declare class LogonService {
     private urlswithouttoken;
     private readonly ntlmURL;
     private readonly loginURL;
-    readonly dontCheckNow: boolean;
-    readonly active: boolean;
-    readonly ntlm: boolean;
-    readonly urlsWithoutToken: string[];
+    get dontCheckNow(): boolean;
+    get active(): boolean;
+    get ntlm(): boolean;
+    get urlsWithoutToken(): string[];
     constructor(logonPar: LogonParameter, injector: Injector, jwtHelper: JwtHelperService);
     /**
      * Fuer HttpInterceptor Autologin Token holen

@@ -15,8 +15,8 @@
  */
 export declare class ElectronService {
     private readonly ipcrenderer;
-    readonly ipcRenderer: any;
-    readonly isElectron: boolean;
-    readonly electronVersion: any;
+    get ipcRenderer(): any;
+    get isElectron(): boolean;
+    get electronVersion(): any;
     constructor();
 }

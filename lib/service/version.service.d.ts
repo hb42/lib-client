@@ -8,8 +8,8 @@ export declare class VersionService {
     private version;
     private serverversion;
     constructor(http: HttpClient, electronService: ElectronService, location: Location);
-    readonly ver: Version;
-    readonly serverVer: Version;
+    get ver(): Version;
+    get serverVer(): Version;
     /**
      * Versions-Resource aus package.json initialisieren.
      * Der String serverPackage muss eine URL fuer die Server-REST-API enthalten,
