@@ -4,7 +4,7 @@ import {
 } from "@angular/core";
 
 @Pipe({
-        name: "filesize"
+        name: "filesize",
 })
 export class FileSizePipe implements PipeTransform {
 
