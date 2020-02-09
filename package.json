@@ -1,6 +1,6 @@
 {
   "name": "@hb42/lib-client",
-  "version": "1.1.14-beta.0",
+  "version": "1.1.14-beta.5",
   "copyright": "Copyright (c) 2018-2019 Hartmut Bauer",
   "description": "Common objects for Angular clients",
   "main": "dist/index.js",
@@ -11,11 +11,9 @@
     "clean": "npm run clean:dist && npm run clean:tmp",
     "ngc": "./node_modules/.bin/ng build",
     "build": "npm run clean && npm run ngc",
-    "pack:osx": "./node_modules/.bin/rimraf ./dist/*.tgz && cd dist && npm pack && cp *.tgz ../../_dist && cp *.tgz ../../_dist/hb42-lib-client-latest.tgz && cd .. ",
-    "pack:win": "./node_modules/.bin/rimraf ./dist/*.tgz && cd dist && npm pack && copy *.tgz ../../_dist && copy *.tgz ../../_dist/hb42-lib-client-latest.tgz && cd .. ",
-    "pack": "npm run pack:$npm_package_config_platform",
+    "pack": "./node_modules/.bin/rimraf ./dist/*.tgz && cd dist && npm pack && ../node_modules/.bin/copyfiles *.tgz ../../_dist && cd .. ",
     "commit": "git add -A ./lib && git commit -m \"publish npm package\" ./lib",
-    "make": "npm version prerelease --preid=beta && npm run build && npm run pack",
+    "make": "npm --no-git-tag-version version prerelease --preid=beta && npm run build && npm run pack",
     "release:patch": "npm version patch && npm run build && npm run pack",
     "release:minor": "npm version minor && npm run build && npm run pack",
     "release:major": "npm version major && npm run build && npm run pack",
@@ -23,6 +21,8 @@
   },
   "author": "hb",
   "license": "MIT",
+  "private": true,
+  "repository": "hb42/lib-client",
   "config": {
     "platform": "win"
   },
