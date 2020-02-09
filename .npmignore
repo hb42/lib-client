@@ -145,6 +145,7 @@ tsconfig-aot.json
 tslint.json
 gulpfile.js
 .github
+ng-package.json
 
 # aot
 *.ngfactory.js
@@ -153,6 +154,7 @@ gulpfile.js
 
 # hb
 div/
+lib/
 dist/
 tmp/
 src/

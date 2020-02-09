@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "",
       "sourceRoot": "src",
-      "prefix": "lib",
+      "prefix": "lib-client",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -33,7 +33,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/lib-client/tsconfig.lib.prod.json"
+              "src/tsconfig.lib.prod.json"
             ],
             "exclude": [
               "**/node_modules/**"

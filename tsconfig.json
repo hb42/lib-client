@@ -12,7 +12,7 @@
     "importHelpers": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
-    "outDir": "lib",
+    "outDir": "dist",
     "sourceMap": false,
     "typeRoots": [
       "node_modules/@types"
