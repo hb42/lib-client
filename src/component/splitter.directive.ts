@@ -23,18 +23,12 @@
  * https://hacks.mozilla.org/2013/12/application-layout-with-css3-flexible-box-module/
  */
 
-import {
-    Directive,
-    ElementRef,
-    Input,
-    OnInit,
-} from "@angular/core";
+import { Directive, ElementRef, Input, OnInit } from "@angular/core";
 
 @Directive({
   selector: "[fb-splitter]",
 })
 export class FlexboxSplitter implements OnInit {
-
   public static SPLITTER_EVENT: string = "hbsplitter";
 
   // inputs
@@ -97,8 +91,12 @@ export class FlexboxSplitter implements OnInit {
     // var event = new Event("hb.splitter"); fkt. leider nicht im *IE*, statt dessen:
     const params: any = { bubbles: false, cancelable: false, detail: undefined };
     this.splitterEvent = document.createEvent("CustomEvent");
-    this.splitterEvent
-        .initCustomEvent(FlexboxSplitter.SPLITTER_EVENT, params.bubbles, params.cancelable, params.detail);
+    this.splitterEvent.initCustomEvent(
+      FlexboxSplitter.SPLITTER_EVENT,
+      params.bubbles,
+      params.cancelable,
+      params.detail
+    );
 
     const drag = (evt: DragEvent) => {
       this.dimension === "width" ? calcSize(evt.clientX) : calcSize(evt.clientY);
@@ -141,14 +139,16 @@ export class FlexboxSplitter implements OnInit {
     };
 
     this.splitter.addEventListener("mousedown", (evt: DragEvent) => {
-      evt.preventDefault();    // prevent text selection
+      evt.preventDefault(); // prevent text selection
       this.lastPos = this.dimension === "width" ? evt.clientX : evt.clientY;
       window.addEventListener("mousemove", drag);
       window.addEventListener("mouseup", endDrag);
     });
 
     // default pos setzen, oder ggf. letzten Stand holen
-    this.lastPos = this.dimension === "width" ? this.splitter.getBoundingClientRect().left
+    this.lastPos =
+      this.dimension === "width"
+        ? this.splitter.getBoundingClientRect().left
         : this.splitter.getBoundingClientRect().top;
     if (this.storageId) {
       const state = localStorage.getItem(this.storageId);
@@ -158,5 +158,4 @@ export class FlexboxSplitter implements OnInit {
       }
     }
   }
-
 }

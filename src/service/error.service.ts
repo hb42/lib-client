@@ -30,11 +30,10 @@ import { ElectronService } from "./electron.service";
 // @dynamic
 @Injectable()
 export class ErrorService implements ErrorHandler {
-
   public static errorPage: string = "error";
 
   private router: Router;
-  private readonly errors: Array<{ title: string, message: string }>;
+  private readonly errors: Array<{ title: string; message: string }>;
 
   constructor(private injector: Injector, private electronService: ElectronService) {
     console.debug("c'tor ErrorService");
@@ -53,7 +52,7 @@ export class ErrorService implements ErrorHandler {
     if (!this.router) {
       this.router = this.getRouter();
     }
-    this.errors.push({title: short, message: desc});
+    this.errors.push({ title: short, message: desc });
     console.debug("** newError");
     console.debug(short + " - " + desc);
     this.router.navigate(["/" + ErrorService.errorPage]);

@@ -21,7 +21,6 @@ import { LOGON_OPTIONS } from "./logonToken";
  */
 @Injectable()
 export class LogonService {
-
   private httphandler: HttpClient;
   private logonPar: LogonParameter;
   private dontcheck = false;
@@ -43,9 +42,11 @@ export class LogonService {
     return this.urlswithouttoken;
   }
 
-  constructor(@Inject(LOGON_OPTIONS) logonPar: LogonParameter,
-              private injector: Injector,
-              private jwtHelper: JwtHelperService) {
+  constructor(
+    @Inject(LOGON_OPTIONS) logonPar: LogonParameter,
+    private injector: Injector,
+    private jwtHelper: JwtHelperService
+  ) {
     console.debug("c'tor LogonService appName=" + logonPar.appName);
     this.logonPar = logonPar;
     // Ausnahmen, bei denen keinToken geprueft wird
@@ -61,15 +62,18 @@ export class LogonService {
    * returns {Promise<string>}
    */
   public getTokenWithCheck(): Promise<string> {
-    if (this.dontcheck) {  // Token wird gerade geholt -> warten
+    if (this.dontcheck) {
+      // Token wird gerade geholt -> warten
       console.debug("LogonService: wait for new token");
       return this.waitForToken();
-    } else if (this.tokenExpiresIn(30)) {  // laeuft bald ab -> neues Token
+    } else if (this.tokenExpiresIn(30)) {
+      // laeuft bald ab -> neues Token
       console.debug("LogonService: tokenExpires - do autologin");
       // wirft im Fehlerfall Error -> evtl. hier Fehlerhandling mit try catch & ErrorService
       // s. default-autologin-jwt-handler
       return this.autoLogin();
-    } else {  // Token als Promise liefern
+    } else {
+      // Token als Promise liefern
       return new Promise<string>((resolve, reject) => {
         resolve(this.getToken());
       });
@@ -91,15 +95,19 @@ export class LogonService {
     }
     console.debug(">>> AUTO LOGIN");
     console.debug(">>> 1 getting ntlm user");
-    return this.httphandler.get(this.ntlmURL)  // NTLM-Server aufrufen
-      .toPromise().then((tmp: any) => {
+    return this.httphandler
+      .get(this.ntlmURL) // NTLM-Server aufrufen
+      .toPromise()
+      .then((tmp: any) => {
         console.debug(">>> 2 success temp-token=" + tmp["token"]);
-        console.debug(">>> 3 logging into REST API");                 // mit Token webserviceServer aufrufen
-        return this.httphandler.get(this.loginURL + tmp["token"])
-          .toPromise().then((jwt: any) => {
+        console.debug(">>> 3 logging into REST API"); // mit Token webserviceServer aufrufen
+        return this.httphandler
+          .get(this.loginURL + tmp["token"])
+          .toPromise()
+          .then((jwt: any) => {
             console.debug(">>> 4 result jwt-token=" + jwt["jwt"]);
             if (jwt) {
-              this.setToken(jwt["jwt"]);                 // in local storage ablegen
+              this.setToken(jwt["jwt"]); // in local storage ablegen
               this.dontcheck = false;
               return jwt["jwt"];
             } else {
@@ -122,7 +130,7 @@ export class LogonService {
     if (token) {
       jsonWebToken = this.jwtHelper.decodeToken(token);
     }
-    return (jsonWebToken ? jsonWebToken.data || {} : {});
+    return jsonWebToken ? jsonWebToken.data || {} : {};
   }
 
   /**
@@ -191,7 +199,5 @@ export class LogonService {
         resolve(this.getToken());
       }
     }, ms);
-
   }
-
 }

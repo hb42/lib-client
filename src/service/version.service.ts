@@ -1,14 +1,9 @@
 import { Location } from "@angular/common";
+
+import { HttpClient } from "@angular/common/http";
+import { Injectable, VERSION } from "@angular/core";
 // import { major, minor, patch, prerelease} from "semver";
 import * as semver from "semver";
-
-import {
-  HttpClient,
-} from "@angular/common/http";
-import {
-  Injectable,
-  VERSION,
-} from "@angular/core";
 
 import { ElectronService } from "./electron.service";
 import { Version } from "./version";
@@ -18,9 +13,11 @@ export class VersionService {
   private version: Version;
   private serverversion: Version;
 
-  constructor(private http: HttpClient, private electronService: ElectronService,
-              private location: Location) {
-  }
+  constructor(
+    private http: HttpClient,
+    private electronService: ElectronService,
+    private location: Location
+  ) {}
 
   public get ver(): Version {
     return this.version;
@@ -39,33 +36,40 @@ export class VersionService {
    */
   public async init(serverPackage: string): Promise<Version> {
     const webserver = this.location.prepareExternalUrl("");
-    return this.http.get(webserver + "package.json").toPromise()
-        .then(async (r: any) => {
-          r["versions"] = ["Angular " + VERSION.full];
-          if (this.electronService.isElectron) {
-            r["versions"].push("Electron " + this.electronService.electronVersion);
-          }
-          try {
-            const gh = await this.http.get(webserver + "resource/git.txt", { responseType: "text" }).toPromise();
-            r["githash"] = gh.replace(/\n/, "").replace(/\r/, "");
-          } catch (e) {
-            console.error("Fehler beim Lesen von ./resource/git.txt");
-            r["githash"] = "";
-          }
-          this.version = this.makeVer(r);
-          if (serverPackage) {
-            return this.http.get(serverPackage).toPromise()
-                .then((sr) => {
-                  this.serverversion = this.makeVer(sr);
-                  return this.version;
-                }).catch((err) => {
-                  console.error("Fehler beim Ermitteln der Server-Version: " + err);
-                  return this.version;
-                });
-          } else {
-            return this.version;
-          }
-        });
+    return this.http
+      .get(webserver + "package.json")
+      .toPromise()
+      .then(async (r: any) => {
+        r["versions"] = ["Angular " + VERSION.full];
+        if (this.electronService.isElectron) {
+          r["versions"].push("Electron " + this.electronService.electronVersion);
+        }
+        try {
+          const gh = await this.http
+            .get(webserver + "resource/git.txt", { responseType: "text" })
+            .toPromise();
+          r["githash"] = gh.replace(/\n/, "").replace(/\r/, "");
+        } catch (e) {
+          console.error("Fehler beim Lesen von ./resource/git.txt");
+          r["githash"] = "";
+        }
+        this.version = this.makeVer(r);
+        if (serverPackage) {
+          return this.http
+            .get(serverPackage)
+            .toPromise()
+            .then((sr) => {
+              this.serverversion = this.makeVer(sr);
+              return this.version;
+            })
+            .catch((err) => {
+              console.error("Fehler beim Ermitteln der Server-Version: " + err);
+              return this.version;
+            });
+        } else {
+          return this.version;
+        }
+      });
   }
 
   private makeVer(pack: any): Version {
@@ -99,5 +103,4 @@ export class VersionService {
     };
     return version;
   }
-
 }

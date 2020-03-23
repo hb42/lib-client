@@ -1,7 +1,4 @@
-import {
-  Pipe,
-  PipeTransform,
-} from "@angular/core";
+import { Pipe, PipeTransform } from "@angular/core";
 
 /**
  * date pipe, die auch im IE funktioniert, liefert date:"dd.MM.y HH:mm:ss"
@@ -11,14 +8,15 @@ import {
  * *** hat sich erledigt, seit Angular5 funktioniert's ***
  */
 @Pipe({
-        name: "iedate"
+  name: "iedate",
 })
 export class IEDatePipe implements PipeTransform {
-
   public transform(value: number): string {
     const d = new Date(value);
-    return d.toLocaleDateString("de", {day: "2-digit", month: "2-digit", year: "numeric"}) + " "
-           + d.toLocaleTimeString();
+    return (
+      d.toLocaleDateString("de", { day: "2-digit", month: "2-digit", year: "numeric" }) +
+      " " +
+      d.toLocaleTimeString()
+    );
   }
-
 }

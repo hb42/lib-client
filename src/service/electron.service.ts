@@ -1,6 +1,4 @@
-import {
-  Injectable,
-} from "@angular/core";
+import { Injectable } from "@angular/core";
 
 /**
  * Verbindung zur electron runtime
@@ -19,7 +17,6 @@ import {
  */
 @Injectable()
 export class ElectronService {
-
   private readonly ipcrenderer: any;
 
   get ipcRenderer() {
@@ -55,5 +52,4 @@ export class ElectronService {
       // console.dir(process.versions);
     }
   }
-
 }

@@ -18,26 +18,25 @@ export function initErrorHandler(errorService: ErrorService) {
 }
 
 @NgModule({
-            imports     : [CommonModule],
-            exports     : [FlexboxSplitter, FileSizePipe, IEDatePipe],
-            declarations: [FlexboxSplitter, FileSizePipe, IEDatePipe],
-            providers   : [
-              ElectronService,
-              ErrorService,
-              VersionService,
-              LogonService,
-              JwtHelperService,
-              {
-                provide : HTTP_INTERCEPTORS,
-                useClass: LogonInterceptor,
-                multi   : true,
-              },
-              {
-                provide   : ErrorHandler,
-                useFactory: initErrorHandler,
-                deps      : [ErrorService],
-              },
-            ],
-          })
-export class LibClientModule {
-}
+  imports: [CommonModule],
+  exports: [FlexboxSplitter, FileSizePipe, IEDatePipe],
+  declarations: [FlexboxSplitter, FileSizePipe, IEDatePipe],
+  providers: [
+    ElectronService,
+    ErrorService,
+    VersionService,
+    LogonService,
+    JwtHelperService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LogonInterceptor,
+      multi: true,
+    },
+    {
+      provide: ErrorHandler,
+      useFactory: initErrorHandler,
+      deps: [ErrorService],
+    },
+  ],
+})
+export class LibClientModule {}

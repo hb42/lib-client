@@ -1,4 +1,10 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
+} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { JwtHeader } from "@hb42/lib-common";
 import { EMPTY, from, Observable, throwError } from "rxjs";
@@ -20,7 +26,6 @@ import { LogonService } from "./logon.service";
  */
 @Injectable()
 export class LogonInterceptor implements HttpInterceptor {
-
   private whitelist: string[] = [];
 
   constructor(private logonService: LogonService, private errorService: ErrorService) {
@@ -36,43 +41,49 @@ export class LogonInterceptor implements HttpInterceptor {
       return this.errorHandling(request, next);
     } else {
       const token: Promise<string> = this.logonService.getTokenWithCheck();
-      return from(token).pipe(mergeMap((asyncToken: string) => {
-        // console.debug("insert token into request " + request.url);
-        request = request.clone({setHeaders: {[JwtHeader]: asyncToken}});
-        return this.errorHandling(request, next);
-      }));
+      return from(token).pipe(
+        mergeMap((asyncToken: string) => {
+          // console.debug("insert token into request " + request.url);
+          request = request.clone({ setHeaders: { [JwtHeader]: asyncToken } });
+          return this.errorHandling(request, next);
+        })
+      );
     }
   }
 
   private isWhitelisted(request: HttpRequest<any>): boolean {
-    return (this.whitelist.findIndex((addr) => request.url.startsWith(addr)) > -1);
+    return this.whitelist.findIndex((addr) => request.url.startsWith(addr)) > -1;
   }
 
   private errorHandling(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // console.debug("INTERCEPT (2 call) " + request.url);
-    return next.handle(request).pipe(catchError((err: any, obs) => {
-      console.debug("LogonInterceptor: errorHandling " + request.url);
-      console.dir(err);
-      if (err instanceof HttpErrorResponse) {
-        if (err.status === 0 /*&& err.type === 3*/) { // network error (Server weg?)
-          console.debug("LogonInterceptor: network error");
-          this.errorService.newError("Network Error", "Der Server ist nicht erreichbar.");
-        } else if (err.status >= 400) {
-          console.debug("LogonInterceptor: HTTP-Error " + err.status);
-          if (err.status === 401 || err.status === 403) {
-            this.errorService.resetApp();
-          } else {
-            this.errorService.newError(err.status + " - " + err.statusText,
-                err.message || "Server liefert ungueltige Daten.");
+    return next.handle(request).pipe(
+      catchError((err: any, obs) => {
+        console.debug("LogonInterceptor: errorHandling " + request.url);
+        console.dir(err);
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 0 /*&& err.type === 3*/) {
+            // network error (Server weg?)
+            console.debug("LogonInterceptor: network error");
+            this.errorService.newError("Network Error", "Der Server ist nicht erreichbar.");
+          } else if (err.status >= 400) {
+            console.debug("LogonInterceptor: HTTP-Error " + err.status);
+            if (err.status === 401 || err.status === 403) {
+              this.errorService.resetApp();
+            } else {
+              this.errorService.newError(
+                err.status + " - " + err.statusText,
+                err.message || "Server liefert ungueltige Daten."
+              );
+            }
           }
+          return EMPTY; // Observable.empty();
+        } else {
+          // this.errorService.newError("Error", JSON.stringify(err));
+          console.error("LogonInterceptor: unhandled exception - rethrow");
+          return throwError(err);
         }
-        return EMPTY; // Observable.empty();
-      } else {
-        // this.errorService.newError("Error", JSON.stringify(err));
-        console.error("LogonInterceptor: unhandled exception - rethrow");
-        return throwError(err);
-      }
-    }));
+      })
+    );
   }
-
 }

@@ -23,7 +23,6 @@ import { Injectable } from "@angular/core";
 // @dynamic
 @Injectable()
 export class AppConfig {
-
   public static settings: any = {};
 
   public static load(jsonFile: string) {

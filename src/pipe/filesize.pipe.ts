@@ -1,16 +1,12 @@
-import {
-  Pipe,
-  PipeTransform,
-} from "@angular/core";
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-        name: "filesize",
+  name: "filesize",
 })
 export class FileSizePipe implements PipeTransform {
-
   private readonly suffix: string[];
   constructor() {
-    this.suffix = [ "Bytes", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    this.suffix = ["Bytes", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
   }
 
   public transform(value: any /*, params: any[]*/): any {

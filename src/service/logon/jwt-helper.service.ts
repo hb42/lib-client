@@ -9,7 +9,6 @@ import { Injectable } from "@angular/core";
  */
 @Injectable()
 export class JwtHelperService {
-
   public urlBase64Decode(str: string): string {
     let output = str.replace(/-/g, "+").replace(/_/g, "/");
     switch (output.length % 4) {
@@ -35,8 +34,10 @@ export class JwtHelperService {
     const parts = token.split(".");
 
     if (parts.length !== 3) {
-      throw new Error("The inspected token doesn\'t appear to be a JWT. " +
-          "Check to make sure it has three parts and see https://jwt.io for more.");
+      throw new Error(
+        "The inspected token doesn't appear to be a JWT. " +
+          "Check to make sure it has three parts and see https://jwt.io for more."
+      );
     }
 
     const decoded = this.urlBase64Decode(parts[1]);
@@ -85,20 +86,18 @@ export class JwtHelperService {
     }
 
     for (
-        // initialize result and counters
-        let bc: number = 0, bs: any, buffer: any, idx: number = 0;
-        // get next character
-        (buffer = str.charAt(idx++));
-        // character found in table? initialize bit storage and add its ascii value;
-        ~buffer &&
-        (
-            (bs = bc % 4 ? bs * 64 + buffer : buffer),
-                // and if not first of each 4 characters,
-                // convert the first 8 bits to one ascii character
-            bc++ % 4
-        )
-            ? (output += String.fromCharCode(255 & (bs >> ((-2 * bc) & 6))))
-            : 0
+      // initialize result and counters
+      let bc: number = 0, bs: any, buffer: any, idx: number = 0;
+      // get next character
+      (buffer = str.charAt(idx++));
+      // character found in table? initialize bit storage and add its ascii value;
+      ~buffer &&
+      ((bs = bc % 4 ? bs * 64 + buffer : buffer),
+      // and if not first of each 4 characters,
+      // convert the first 8 bits to one ascii character
+      bc++ % 4)
+        ? (output += String.fromCharCode(255 & (bs >> ((-2 * bc) & 6))))
+        : 0
     ) {
       // try to find character in table (0-63, not found => -1)
       buffer = chars.indexOf(buffer);
@@ -108,12 +107,11 @@ export class JwtHelperService {
 
   private b64DecodeUnicode(str: any) {
     return decodeURIComponent(
-        Array.prototype.map
-            .call(this.b64decode(str), (c: any) => {
-              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-            })
-            .join(""),
+      Array.prototype.map
+        .call(this.b64decode(str), (c: any) => {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
     );
   }
-
 }

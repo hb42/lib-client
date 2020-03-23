@@ -15,8 +15,9 @@
    *   enabled which cause lint failures in your code. When TSLint reaches a major version bump, tslint:recommended will
    *   be updated to be identical to tslint:latest.
    */
-  "extends": "tslint:latest",
+  "extends": ["tslint:latest", "tslint-plugin-prettier", "tslint-config-prettier"],
   "rules": {
+    "prettier": true,
     /*
      * Any rules specified here will override those from the base config we are extending
      */
@@ -35,7 +36,9 @@
     /* sort explizit auf case-insensitive */
     "ordered-imports": [true, {"import-sources-order": "case-insensitive", "named-imports-order": "case-insensitive"}],
     /* import from rxjs/observable etc. erlauben */
-    "no-submodule-imports": [true, "rxjs", true, "@angular/common"]
+    "no-submodule-imports": [true, "rxjs", true, "@angular"],
+    /* public vor private etc. wenn mal Zeit ist... */
+    "member-ordering": false
   },
   "rulesDirectory": [
     /*

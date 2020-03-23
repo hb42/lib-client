@@ -4,7 +4,6 @@ import { makeSseUrl } from "@hb42/lib-common";
  * Auf SSE Events reagieren
  */
 export class SseHandler {
-
   private sse: EventSource;
 
   /**
@@ -47,5 +46,4 @@ export class SseHandler {
   public removeEventListener(type: string, listener: EventListenerOrEventListenerObject) {
     this.sse.removeEventListener(type, listener);
   }
-
 }
