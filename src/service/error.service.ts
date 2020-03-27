@@ -30,7 +30,7 @@ import { ElectronService } from "./electron.service";
 // @dynamic
 @Injectable()
 export class ErrorService implements ErrorHandler {
-  public static errorPage: string = "error";
+  public static errorPage = "error";
 
   private router: Router;
   private readonly errors: Array<{ title: string; message: string }>;
@@ -89,7 +89,7 @@ export class ErrorService implements ErrorHandler {
     if (this.electronService.isElectron) {
       this.electronService.ipcRenderer.send("reload-app", "errorService");
     } else {
-      document.location!.reload(true);
+      document.location.reload(true);
     }
   }
 

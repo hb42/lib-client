@@ -15,12 +15,12 @@
  *             },
  *             ...
  * </pre>
- * @property {string} logon - Logon-Handling:<br>... NO = kein JWT-Handling,
- *                                           <br>... NTLM = Autologon via NTLM,
- *                                           <br>... FORM = Form-Login (noch nicht implementiert)
- * @property {string} appName - App-Name fuer NTLM-Autologon
- * @property {string} NTLMserver - Server fuer die NTLM-Anmeldung
- * @property {string} webserviceServer - Hier laeuft der Autologon,<br>... an diesen Server werden JWT gesendet
+ * @param logon - Logon-Handling:<br>... NO = kein JWT-Handling,
+ *                               <br>... NTLM = Autologon via NTLM,
+ *                               <br>... FORM = Form-Login (noch nicht implementiert)
+ * @param appName - App-Name fuer NTLM-Autologon
+ * @param NTLMserver - Server fuer die NTLM-Anmeldung
+ * @param webserviceServer - Hier laeuft der Autologon,<br>... an diesen Server werden JWT gesendet
  *
  * @see {@link LOGON_OPTIONS}
  * @see {@link LogonService}

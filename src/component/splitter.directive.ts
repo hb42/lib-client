@@ -26,13 +26,15 @@
 import { Directive, ElementRef, Input, OnInit } from "@angular/core";
 
 @Directive({
+  // tslint:disable-next-line:directive-selector
   selector: "[fb-splitter]",
 })
+// tslint:disable-next-line:directive-class-suffix
 export class FlexboxSplitter implements OnInit {
-  public static SPLITTER_EVENT: string = "hbsplitter";
+  public static SPLITTER_EVENT = "hbsplitter";
 
   // inputs
-  @Input() private storageId: string = "";
+  @Input() private storageId = "";
 
   private splitter: HTMLElement;
   private prevEl: HTMLElement;
@@ -43,7 +45,7 @@ export class FlexboxSplitter implements OnInit {
 
   private splitterEvent: CustomEvent;
 
-  private lastPos: number = 0;
+  private lastPos = 0;
 
   constructor(private el: ElementRef) {
     console.debug("c'tor flexboxsplitter");

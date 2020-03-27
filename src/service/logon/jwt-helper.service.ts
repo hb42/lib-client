@@ -77,7 +77,7 @@ export class JwtHelperService {
   // credits for decoder goes to https://github.com/atk
   private b64decode(str: string): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-    let output: string = "";
+    let output = "";
 
     str = String(str).replace(/=+$/, "");
 
@@ -87,7 +87,7 @@ export class JwtHelperService {
 
     for (
       // initialize result and counters
-      let bc: number = 0, bs: any, buffer: any, idx: number = 0;
+      let bc = 0, bs: any, buffer: any, idx = 0;
       // get next character
       (buffer = str.charAt(idx++));
       // character found in table? initialize bit storage and add its ascii value;
