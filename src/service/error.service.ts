@@ -89,7 +89,7 @@ export class ErrorService implements ErrorHandler {
     if (this.electronService.isElectron) {
       this.electronService.ipcRenderer.send("reload-app", "errorService");
     } else {
-      document.location.reload(true);
+      document.location.reload(true); // TODO so bringt das nichts
     }
   }
 
