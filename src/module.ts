@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ErrorHandler, NgModule } from "@angular/core";
 
-import { FlexboxSplitter } from "./component/splitter.directive";
+import { FlexboxSplitter } from "./component/flexbox-splitter.directive";
 import { FileSizePipe } from "./pipe/filesize.pipe";
 import { IEDatePipe } from "./pipe/iedate.pipe";
 import { ElectronService } from "./service/electron.service";

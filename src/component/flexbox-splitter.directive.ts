@@ -26,10 +26,10 @@
 import { Directive, ElementRef, Input, OnInit } from "@angular/core";
 
 @Directive({
-  // tslint:disable-next-line:directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: "[fb-splitter]",
 })
-// tslint:disable-next-line:directive-class-suffix
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FlexboxSplitter implements OnInit {
   public static SPLITTER_EVENT = "hbsplitter";
 

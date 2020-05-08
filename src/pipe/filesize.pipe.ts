@@ -10,7 +10,7 @@ export class FileSizePipe implements PipeTransform {
   }
 
   public transform(value: any /*, params: any[]*/): any {
-    const item: number = Number(value);
+    const item = Number(value);
     return this.conv(item, 0);
   }
 

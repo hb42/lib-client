@@ -1,5 +1,5 @@
 export { LibClientModule } from "./module";
-export { FlexboxSplitter } from "./component/splitter.directive";
+export { FlexboxSplitter } from "./component/flexbox-splitter.directive";
 export { FileSizePipe } from "./pipe/filesize.pipe";
 export { IEDatePipe } from "./pipe/iedate.pipe";
 export { AppConfig } from "./service/app.config";
