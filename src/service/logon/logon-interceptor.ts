@@ -3,7 +3,7 @@ import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
-  HttpRequest
+  HttpRequest,
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { JwtHeader } from "@hb42/lib-common";
