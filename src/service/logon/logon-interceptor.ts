@@ -29,7 +29,7 @@ export class LogonInterceptor implements HttpInterceptor {
   private whitelist: string[] = [];
 
   constructor(private logonService: LogonService, private errorService: ErrorService) {
-    console.debug("c'tor LogonInterceptor");
+    console.debug("c'tor lib-client#LogonInterceptor");
     this.whitelist = logonService.urlsWithoutToken;
   }
 
