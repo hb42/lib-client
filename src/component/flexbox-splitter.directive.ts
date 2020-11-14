@@ -31,6 +31,7 @@ import { Directive, ElementRef, Input, OnInit } from "@angular/core";
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FlexboxSplitter implements OnInit {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   public static SPLITTER_EVENT = "hbsplitter";
 
   // inputs
@@ -101,7 +102,11 @@ export class FlexboxSplitter implements OnInit {
     );
 
     const drag = (evt: DragEvent) => {
-      this.dimension === "width" ? calcSize(evt.clientX) : calcSize(evt.clientY);
+      if (this.dimension === "width") {
+        calcSize(evt.clientX);
+      } else {
+        calcSize(evt.clientY);
+      }
     };
 
     const calcSize = (pos: number) => {

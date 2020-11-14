@@ -10,7 +10,7 @@
       "prefix": "lib-client",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "src/tsconfig.lib.prod.json",
             "project": "ng-package.json"
@@ -32,16 +32,23 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "eslintConfig": ".eslintrc.js",
-            "tsConfig": [
-              "src/tsconfig.lib.prod.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
+        },
+        "eslint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.component.html"
             ]
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "lib-client"
 }

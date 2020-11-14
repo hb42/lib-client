@@ -49,8 +49,7 @@ export class JwtHelperService {
   }
 
   public getTokenExpirationDate(token: string): Date | null {
-    let decoded: any;
-    decoded = this.decodeToken(token);
+    const decoded = this.decodeToken(token);
 
     if (!decoded.hasOwnProperty("exp")) {
       return null;
@@ -73,7 +72,7 @@ export class JwtHelperService {
     return !(date.valueOf() > new Date().valueOf() + offsetSeconds * 1000);
   }
 
-  /* tslint:disable: no-conditional-assignment no-bitwise ban-comma-operator */
+  /* eslint-disable no-cond-assign, no-bitwise, no-sequences */
   // credits for decoder goes to https://github.com/atk
   private b64decode(str: string): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -108,9 +107,10 @@ export class JwtHelperService {
   private b64DecodeUnicode(str: any) {
     return decodeURIComponent(
       Array.prototype.map
-        .call(this.b64decode(str), (c: any) => {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
+        .call(
+          this.b64decode(str),
+          (c: any) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2)
+        )
         .join("")
     );
   }

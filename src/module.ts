@@ -13,6 +13,8 @@ import { LogonService } from "./service/logon/logon.service";
 import { VersionService } from "./service/version.service";
 
 // Verhindern, dass ErrorService mehrfach instanziiert wird
+// (lambda kann hier nicht verwendet werden)
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function initErrorHandler(errorService: ErrorService) {
   return errorService;
 }

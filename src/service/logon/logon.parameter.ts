@@ -15,6 +15,7 @@
  *             },
  *             ...
  * </pre>
+ *
  * @param logon - Logon-Handling:<br>... NO = kein JWT-Handling,
  *                               <br>... NTLM = Autologon via NTLM,
  *                               <br>... FORM = Form-Login (noch nicht implementiert)
@@ -26,9 +27,11 @@
  * @see {@link LogonService}
  * @see {@link LogonInterceptor}
  */
+
 export interface LogonParameter {
   logon: string;
   appName?: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   NTLMserver?: string;
   webserviceServer?: string;
 }
