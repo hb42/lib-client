@@ -1,32 +1,26 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig.json",
-          "e2e/tsconfig.json"
-        ],
+        "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        // *hb* prettier verwenden
-        "prettier/@typescript-eslint"
+        // prettier verwenden
+        "prettier"
+//        "prettier/@typescript-eslint"
       ],
       "rules": {
         "@angular-eslint/component-selector": [
           "error",
           {
             "type": "element",
-            // *hb* an Projekt anpassen
+            // an Projekt anpassen
             "prefix": "lib-client",
             "style": "kebab-case"
           }
@@ -35,24 +29,37 @@
           "error",
           {
             "type": "attribute",
-            // *hb* an Projekt anpassen
+            // an Projekt anpassen
             "prefix": "lib-client",
             "style": "camelCase"
           }
         ],
         "@typescript-eslint/dot-notation": "off",
+        // UpperCase fuer Variablen erlauben
+        "@typescript-eslint/naming-convention": [
+          "error",
+          { "selector": ["variable", "property"], "format": ["camelCase", "UPPER_CASE"] }
+        ],
+        // sonst werden alle enum's angemeckert
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": ["error"],
+        // Webstorm rückt Leerzeilen ein
         "no-trailing-spaces": "off",
-        // *hb* console erlauben
-        "no-console": "off"
+        // console erlauben
+        // "no-console": "off",
+        // console.info, etc. verbieten (aber .debug erlauben)
+        "no-restricted-syntax": [
+          "error",
+          {
+            "selector": "CallExpression[callee.object.name=\"console\"][callee.property.name=/^(info|time|timeEnd|trace)$/]",
+            "message": "Unexpected property on console object was called"
+          }
+        ]
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
     }
   ]

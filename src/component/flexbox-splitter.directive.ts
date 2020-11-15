@@ -31,7 +31,6 @@ import { Directive, ElementRef, Input, OnInit } from "@angular/core";
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FlexboxSplitter implements OnInit {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   public static SPLITTER_EVENT = "hbsplitter";
 
   // inputs

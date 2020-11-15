@@ -48,7 +48,7 @@ export class ElectronService {
       }
     }
     if (this.isElectron) {
-      console.info("Running on electron runtime " + this.electronVersion);
+      console.log("Running on electron runtime " + this.electronVersion);
       // console.dir(process.versions);
     }
   }
