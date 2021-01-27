@@ -44,15 +44,15 @@ export class VersionService {
         if (this.electronService.isElectron) {
           r["versions"].push("Electron " + this.electronService.electronVersion);
         }
-        try {
-          const gh = await this.http
-            .get(webserver + "resource/git.txt", { responseType: "text" })
-            .toPromise();
-          r["githash"] = gh.replace(/\n/, "").replace(/\r/, "");
-        } catch (e) {
-          console.error("Fehler beim Lesen von ./resource/git.txt");
-          r["githash"] = "";
-        }
+        // try {
+        //   const gh = await this.http
+        //     .get(webserver + "resource/git.txt", { responseType: "text" })
+        //     .toPromise();
+        //   r["githash"] = gh.replace(/\n/, "").replace(/\r/, "");
+        // } catch (e) {
+        //   console.error("Fehler beim Lesen von ./resource/git.txt");
+        //   r["githash"] = "";
+        // }
         this.version = this.makeVer(r);
         if (serverPackage) {
           return this.http
@@ -85,22 +85,22 @@ export class VersionService {
         prebuild = typeof pre[1] === "number" ? +pre[1] : 0;
       }
     }
-    const version = {
-      name: pack.name,
-      displayname: pack.displayname,
-      description: pack.description,
+    pack.version = pack.version ?? "0.0.0";
+    const ver = {
+      name: pack.name ?? "",
+      displayname: pack.displayname ?? "",
+      description: pack.description ?? "",
       version: pack.version,
-      copyright: pack.copyright,
-      author: pack.author,
-      license: pack.license,
+      copyright: pack.copyright ?? "",
+      author: pack.author ?? "",
+      license: pack.license ?? "",
       major: semver.major(pack.version),
       minor: semver.minor(pack.version),
       patch: semver.patch(pack.version),
-      prerelease: prerel,
-      build: prebuild,
-      githash: pack.githash ? pack.githash : "",
-      versions: pack.versions,
+      prerelease: prerel ?? "",
+      build: prebuild ?? 0,
+      versions: pack.versions ?? [],
     };
-    return version;
+    return ver;
   }
 }

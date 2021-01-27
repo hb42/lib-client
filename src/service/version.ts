@@ -11,6 +11,5 @@ export interface Version {
   patch: number;
   prerelease: string;
   build: number | null;
-  githash: string;
   versions: string[]; // Versionen von Subsystemen etc.
 }
