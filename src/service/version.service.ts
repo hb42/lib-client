@@ -1,8 +1,6 @@
 import { Location } from "@angular/common";
-
 import { HttpClient } from "@angular/common/http";
 import { Injectable, VERSION } from "@angular/core";
-// import { major, minor, patch, prerelease} from "semver";
 import * as semver from "semver";
 
 import { ElectronService } from "./electron.service";
@@ -36,6 +34,7 @@ export class VersionService {
    */
   public async init(serverPackage: string): Promise<Version> {
     const webserver = this.location.prepareExternalUrl("");
+    // deepcode ignore Ssrf: url-string is checked
     return this.http
       .get(webserver + "package.json")
       .toPromise()
