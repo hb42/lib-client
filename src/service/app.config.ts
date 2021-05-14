@@ -25,8 +25,8 @@ import { Injectable } from "@angular/core";
 export class AppConfig {
   public static settings: any = {};
 
-  public static load(jsonFile: string) {
-    return new Promise((resolve, reject) => {
+  public static load(jsonFile: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.overrideMimeType("application/json");
       xhr.open("GET", jsonFile, true);
